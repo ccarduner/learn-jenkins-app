@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:18-alpine'
+                    image 'node:18'
                     reuseNode true
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
                 stage('Unit tests') {
                     agent {
                         docker {
-                            image 'node:18-alpine'
+                            image 'node:18'
                             reuseNode true
                         }
                     }
@@ -91,6 +91,14 @@ pipeline {
                     node_modules/.bin/netlify status
                     node_modules/.bin/netlify deploy --dir=build
                 '''
+            }
+        }
+
+        stage('Approval') {
+            steps {
+                timeout(time: 15, unit: 'MINUTES') {
+                    input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
+                }
             }
         }
 
