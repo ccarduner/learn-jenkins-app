@@ -9,12 +9,6 @@ pipeline {
 
     stages {
 
-        stage('Docker') {
-            steps {
-                sh 'docker build -t my-playwright .'
-            }
-        }
-
         stage('Build') {
             agent {
                 docker {
@@ -123,7 +117,7 @@ pipeline {
             environment {
                 CI_ENVIRONMENT_URL = 'https://wondrous-cactus-e564de.netlify.app'
             }
-
+            
             steps {
                 sh '''
                     node --version
