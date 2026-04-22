@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import process from 'process';
+
 
 function App() {
   return (
