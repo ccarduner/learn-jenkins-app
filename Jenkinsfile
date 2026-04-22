@@ -93,7 +93,7 @@ pipeline {
                 '''
             }
         }
-        
+
         stage('Prod E2E') {
             agent {
                 docker {
@@ -103,7 +103,7 @@ pipeline {
             }
 
             environment {
-                CI_ENVIRONMENT_URL = 'https://wondrous-cactus-e564de.netlify.app/'
+                CI_ENVIRONMENT_URL = 'https://wondrous-cactus-e564de.netlify.app'
             }
 
             steps {
