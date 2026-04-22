@@ -9,10 +9,16 @@ pipeline {
 
     stages {
 
+        stage('Docker') {
+            steps {
+                sh 'docker build -t my-playwright .'
+            }
+        }
+
         stage('Build') {
             agent {
                 docker {
-                    image 'node:18'
+                    image 'node:18-alpine'
                     reuseNode true
                 }
             }
@@ -33,7 +39,7 @@ pipeline {
                 stage('Unit tests') {
                     agent {
                         docker {
-                            image 'node:18'
+                            image 'node:18-alpine'
                             reuseNode true
                         }
                     }
@@ -117,7 +123,7 @@ pipeline {
             }
 
             environment {
-                CI_ENVIRONMENT_URL = 'https://wondrous-cactus-e564de.netlify.app'
+                NETLIFY_SITE_ID = '7af8df58-3ed8-4f1d-84e7-2792fa4ab413'
             }
 
             steps {
